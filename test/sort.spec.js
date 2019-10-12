@@ -25,9 +25,11 @@ function logSortedDocs(docs, nPrefix = '') {
                 console.log(` ${pad(i++, 4)}  > prop: ${prop.name}`);
             });
         }
+
         if (Array.isArray(symbol.$members)) {
             logSortedDocs(symbol.$members, i + '.');
         }
+
         i++;
     });
 }
@@ -62,6 +64,7 @@ describe('Test: Sorter', () => {
                     'aGlobalObject2',
                     'Code', // class
                     'Code', // constructor
+                    'Code', // ?
                     'Code#bProtectedInstanceProp',
                     'Code.bStaticMethod',
                     'Code#config',
@@ -116,6 +119,7 @@ describe('Test: Sorter', () => {
                 const expectedOrder = [
                     'aGlobalObject',                     // global
                     'aGlobalObject2',                    // global
+                    'Code',                              // global
                     'Code',                              // global
                     'Code',                              // global
                     'fGlobalObjExt',                     // global
@@ -173,6 +177,7 @@ describe('Test: Sorter', () => {
                 const expectedOrder = [
                     'aGlobalObject',                     // public
                     'aGlobalObject2',                    // public
+                    'Code',                              // public
                     'Code',                              // public
                     'Code',                              // public
                     'Code.bStaticMethod',                // public
@@ -234,6 +239,7 @@ describe('Test: Sorter', () => {
                     'kGlobalObjExt',                   // constant
                     'Code',                            // constructor
                     'Code',                            // class
+                    'Code',                            // ?
                     'Code.bStaticMethod',              // method
                     'Code#instanceMethod',             // method
                     'Code.staticMethod',               // method
@@ -301,6 +307,7 @@ describe('Test: Sorter', () => {
                     'aGlobalObject',                  // global     public     property
                     'aGlobalObject2',                 // global     public     property
                     'Code',                           // global     public     constructor
+                    'Code',                           // global     public     class
                     'Code',                           // global     public     class
                     'fGlobalObjExt',                  // global     public     property
                     'gGlobalArray',                   // global     public     property

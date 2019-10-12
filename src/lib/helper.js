@@ -36,6 +36,7 @@ const helper = {
         try {
             out = JSON.parse(string);
         } catch (e) {}
+
         return out;
     },
 

@@ -142,6 +142,7 @@ describe('JSDoc configuration options', () => {
         function throwTest() {
             jsdocx.parse({ files: '' });
         }
+
         expect(throwTest).toThrow();
     });
 

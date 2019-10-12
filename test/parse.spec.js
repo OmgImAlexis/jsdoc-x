@@ -19,6 +19,7 @@ describe('Test: Parser', () => {
         function throwTest() {
             jsdocx.parse(undefined);
         }
+
         expect(throwTest).toThrow();
     });
 

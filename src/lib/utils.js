@@ -8,6 +8,7 @@ function bracket(prop) {
     const re = /^[a-z$_][a-z\d$_]*$/i; // non-bracket notation
     return re.test(prop) ? '.' + prop : '["' + prop + '"]';
 }
+
 // fixes a jsdoc bug
 // e.g. MyClass.Enum."STATE"] —» MyClass.Enum.STATE
 function fixBracket(notation) {
@@ -40,6 +41,7 @@ function notate(obj, notation) {
         props.shift();
         return notate(o, props);
     }
+
     return o;
 }
 
@@ -105,6 +107,7 @@ const utils = {
             const codeName = getMetaCodeName(symbol);
             if (codeName) return codeName.replace(/.*?[#.~:](\w+)$/i, '$1');
         }
+
         return symbol.name;
     },
 
@@ -194,10 +197,12 @@ const utils = {
                 && /^".*"$/.test(symbol.memberof) === false) {
                 return cleanName(symbol.memberof);
             }
+
             longname = cleanName(symbol.$longname);
         } else {
             longname = cleanName(symbol);
         }
+
         // colon (:) is not a level separator. JSDoc uses colon in cases like:
         // `obj~event:ready` or `module:someModule`
         if (!longname || !(/[.#~]/g).test(longname)) return '';
@@ -243,11 +248,13 @@ const utils = {
                 || utils.getCodeName(symbol) === name) {
                 return symbol;
             }
+
             if (symbol.$members) {
                 const sym = utils.getSymbolByName(symbol.$members, name);
                 if (sym) return sym;
             }
         }
+
         return null;
     },
 
@@ -727,6 +734,7 @@ const utils = {
                 // console.log('comparing:', A, '<<—>>', B, '==>', result);
             };
         }
+
         // grouped sort (by scope). also moving inner symbols to end.
         return (a, b) => {
             const A = prop ? a[prop] : a;

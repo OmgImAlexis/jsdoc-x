@@ -77,6 +77,7 @@ function buildArgs(options) {
     if (_.isString(opts.package)) {
         args.push('-P', opts.package);
     }
+
     if (opts.recurse) args.push('-r');
     if (opts.pedantic) args.push('--pedantic');
     if (opts.query) args.push('-q', opts.query);
@@ -125,6 +126,7 @@ function normalizeAccess(access) {
     if (!_.isString(access) && !_.isArray(access)) {
         return ['public', 'protected'];
     }
+
     return helper.ensureArray(access);
 }
 
@@ -177,6 +179,7 @@ function hierarchy(docs, sortType) {
                     // reverse bec. we used eachRight
                     parent.$members.reverse();
                 }
+
                 docs.splice(index, 1);
             }
         }
@@ -269,6 +272,7 @@ jsdocx.filter = (docs, options, predicate) => {
                 memo.push(symbol); // original symbol pushed
             }
         }
+
         return memo;
     }, []);
 
@@ -277,6 +281,7 @@ jsdocx.filter = (docs, options, predicate) => {
     } else if (options.sort) {
         sortDocs(docs, options.sort);
     }
+
     return docs;
 };
 
@@ -317,6 +322,7 @@ jsdocx.parse = (options, callback) => {
                         return opts;
                     });
             }
+
             if (hasSource) {
                 return helper.createTempFile(opts.source)
                     .then(file => {
@@ -339,6 +345,7 @@ jsdocx.parse = (options, callback) => {
             if (options.output) {
                 return helper.writeJSON(options.output, docs);
             }
+
             return docs;
         })
         .catch(err => {
@@ -350,6 +357,7 @@ jsdocx.parse = (options, callback) => {
                 err.message = err.message + ' \nExecuted JSDoc Command: ' + cmd + '\n'
                     + 'with JSON configuration: ' + JSON.stringify(conf || {});
             }
+
             throw err;
         })
         .nodeify(callback);
